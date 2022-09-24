@@ -4,7 +4,7 @@ Matrix::Matrix(int rows, int cols)
 {
     try {
         if(rows < 1){
-            throw (QString("Пчел ты еблан"));
+            throw (QString("Пчел ты "));
         }
         if(cols < 1){
             throw (QString("Второй раз"));
@@ -12,7 +12,6 @@ Matrix::Matrix(int rows, int cols)
     } catch (QString hui) {
         qDebug() << "\nNot correct rows|cols :: " << hui << "\n";
     }
-
     this->rows = rows;
     this->cols = cols;
     matrix = new int*[rows];

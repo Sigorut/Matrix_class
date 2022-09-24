@@ -4,14 +4,15 @@ Matrix::Matrix(int rows, int cols)
 {
     try {
         if(rows < 1){
-            throw (QString("Пчел ты "));
+            throw (QString("init ROWS"));
         }
         if(cols < 1){
-            throw (QString("Второй раз"));
+            throw (QString("init COLS"));
         }
-    } catch (QString hui) {
-        qDebug() << "\nNot correct rows|cols :: " << hui << "\n";
+    } catch (QString error) {
+        qDebug() << "\nNot correct rows|cols :: " << error << "\n";
     }
+
     this->rows = rows;
     this->cols = cols;
     matrix = new int*[rows];
@@ -34,6 +35,14 @@ Matrix::Matrix(const Matrix &copy){
         }
     }
 }
+void Matrix::checkEqual(const Matrix &second){
+    if(rows != second.rows){
+        throw (QString("!Equal ROWS"));
+    }
+    if(cols != second.cols){
+        throw (QString("!Equal COLS"));
+    }
+}
 int* Matrix::operator[](int i){
     return matrix[i];
 }
@@ -47,9 +56,11 @@ Matrix Matrix::operator=(const Matrix &second){
 }
 
 Matrix Matrix::operator+(const Matrix &second){
-    if(rows != second.rows || cols != second.cols){
-        std::cout << "\nNot equal rows|cols matrix\n";
-        exit(0);
+    try{
+        throw std::bad_alloc();
+        checkEqual(second);
+    }catch(std::exception &e ){
+        qDebug() << "msg";
     }
     Matrix answer(rows, cols);
     for(int i = 0; i < rows; i++){
@@ -60,10 +71,7 @@ Matrix Matrix::operator+(const Matrix &second){
     return answer;
 }
 Matrix Matrix::operator-(const Matrix &second){
-    if(rows != second.rows || cols != second.cols){
-        std::cout << "\nNot equal rows|cols matrix\n";
-        exit(0);
-    }
+    checkEqual(second);
     Matrix answer(rows, cols);
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){
@@ -74,10 +82,7 @@ Matrix Matrix::operator-(const Matrix &second){
 }
 
 Matrix Matrix::operator*(const Matrix &second){
-    if(rows != second.rows || cols != second.cols){
-        std::cout << "\nNot equal rows|cols matrix\n";
-        exit(0);
-    }
+    checkEqual(second);
     Matrix answer(rows, cols);
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < cols; j++){

@@ -3,6 +3,7 @@
 #include<iostream>
 #include<QStringList>
 #include<QDebug>
+#include<QTest>
 #include<QString>
 class Matrix
 {
@@ -24,6 +25,7 @@ public:
     int getMin();
     QString toString();
     Matrix transp();
+    void checkEqual(const Matrix &second);
 private:
     int rows = 0;
     int cols = 0;

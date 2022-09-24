@@ -1,5 +1,5 @@
 QT -= gui
-
+QT += testlib
 CONFIG += c++11 console
 CONFIG -= app_bundle
 
@@ -9,7 +9,8 @@ CONFIG -= app_bundle
 
 SOURCES += \
         main.cpp \
-        matrix.cpp
+        matrix.cpp \
+        testclass.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -17,4 +18,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    matrix.h
+    matrix.h \
+    testclass.h
